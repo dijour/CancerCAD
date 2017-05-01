@@ -1,0 +1,27 @@
+4/11/2017 - 3 hours - researching various Open CV tools, attempting 
+            implementation of thresholding/contrasting methods
+4/13/2017 - 2 hours - research point clouds
+4/14/2017 - 3 hours - after meeting with Lukas, implementing blob detection
+4/17/2017 - 6 hours - fine tuned blob detection (got it to work with keypoints
+            on a few of the MRI slices) and began work on the GUI via tkinter
+4/18/2017 - 6 hours - finished blob detection, started manual drawing program,
+            began making tkinter GUI match storyboard's layout
+4/20/2017 - 5 hours - researched 3D plotting modules, found MatPlotLib to be
+            suitable for my needs. Fine tuned manual drawing program to export
+            2D list of polygons which could be easily read
+4/23/2017 - 6 hours - 3D is working! Got MatPlotLib to read a large 2D list of 
+            polygon coordinates, and return a height adjusted, triangularized 
+            mesh 
+4/24/2016 - 7 hours - Finalized 3D functionality in MatPlotLib. 
+            Created fully functional GUI, which has self-embedded 
+            MatPlotLib graphs (which are dynamic, not static), pop-up error 
+            warnings, user prompts, multiple pages, etc.
+4/25/2016 - 4 hours - Integrated most of the different functionalities into 
+            the "Main.py" file
+4/28/2016 - 6 hours - 3D PRINTING WORKS! Can now convert any polygon mesh into
+            and STL (3D printable file). Had to figure out how to integrate 
+            existing STL converter frameworks to work with my mesh's 
+            simple data structure
+5/1/2016  - 5 hours - created GitHub for the project, began work on creating 
+            an executable version of the program
+
