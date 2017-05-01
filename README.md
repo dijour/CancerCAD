@@ -16,7 +16,7 @@ CancerCAD is a medical imaging tool to help doctors and patients understand the 
 
 
 ## Running CancerCAD
-Download the project as a ZIP file. Run the "Main.py" file, and select a directory for the MRI JPGs (sample images have been provided in this repository, in "Brain Folder")
+Download the project as a ZIP file. Run the "Main.py" file, and select a directory for the MRI JPGs (sample images have been provided in this repository, in "Brain Folder").
 
 ## Video
 https://www.youtube.com/watch?v=mPYeTJd8klQ
