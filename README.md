@@ -1,5 +1,5 @@
-# CancerCAD
-A Carnegie Mellon University 15-112 Term Project
+# CancerCAD - A Carnegie Mellon University 15-112 Term Project
+
 Author: Dean Dijour
 Mentor: Lukas Peraza
 
