@@ -23,5 +23,6 @@ https://www.youtube.com/watch?v=mPYeTJd8klQ
 
 ## Features
 * High-precision manual two-dimensional tumor selection
-* True-to-shape 3D modeling capabilities, as well as 3D printing functionality
+* True-to-shape 3D modeling capabilities, as well as 3D printing functionality:
+![3d working](https://cloud.githubusercontent.com/assets/26984516/25586763/d46015e4-2e6e-11e7-96d5-a735ef7b6a74.png)
 * Automatic two-dimensional tumor detection via OpenCV "blob detector"
