@@ -4,6 +4,7 @@ CancerCAD is a medical imaging tool to help doctors and patients understand the 
 
 * Author: Dean Dijour
 * Mentor: Lukas Peraza
+* Instructors: David Kosbie & David Andersen
 
 ## DEPENDENCIES
 * Python 3 (https://www.python.org/downloads/)
