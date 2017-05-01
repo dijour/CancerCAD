@@ -10,7 +10,7 @@
 ░ ░            ░  ░         ░ ░ ░         ░  ░   ░     ░ ░            ░  ░   ░    
 ░                             ░                        ░                   ░      
 
-A 15-112 Term Project
+A Carnegie Mellon University 15-112 Term Project
 Author: Dean Dijour
 Mentor: Lukas Peraza
 
