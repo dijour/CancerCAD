@@ -1,11 +1,9 @@
 # CancerCAD - A Carnegie Mellon University 15-112 Term Project
 
-Cancer CAD is a medical imaging tool to help doctors and patients understand the three-dimensional characteristics of tumors, using only two-dimensional tumor data (magnetic resonance images).
+CancerCAD is a medical imaging tool to help doctors and patients understand the three-dimensional characteristics of tumors, using only two-dimensional tumor data (magnetic resonance images).
 
-*Author: Dean Dijour
-*Mentor: Lukas Peraza
-
-Cancer CAD is a medical imaging tool to help doctors and patients understand the three-dimensional characteristics of tumors, using only two-dimensional tumor data (magnetic resonance images).
+* Author: Dean Dijour
+* Mentor: Lukas Peraza
 
 ## DEPENDENCIES
 * Python 3 (https://www.python.org/downloads/)
@@ -17,10 +15,10 @@ Cancer CAD is a medical imaging tool to help doctors and patients understand the
 * PIL (pip install pillow)
 
 
-## HOW TO RUN
+## Running CancerCAD
 Download the project as a ZIP file. Run the "Main.py" file
 
-## VIDEO
+## Video
 https://www.youtube.com/watch?v=mPYeTJd8klQ
 
 ## Features
