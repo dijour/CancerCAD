@@ -95,7 +95,7 @@ class StartPage(tk.Frame):
         button2.pack(pady=40,padx=10)
 
         button3 = ttk.Button(self, text="Help",
-                            command=lambda: controller.show_frame(PageSix))
+                            command=lambda: controller.show_frame(PageFive))
         button3.pack(pady=40,padx=10)
 
 
