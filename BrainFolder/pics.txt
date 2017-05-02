@@ -1,1 +1,1 @@
-Use the provided JPG pictures to test CancerCAD, or provide your own! 
+Use the provided JPG pictures to test CancerCAD, or provide your own! All pictures were sourced as DICOM photos from https://wiki.cancerimagingarchive.net/display/Public/RIDER+NEURO+MRI
