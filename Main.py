@@ -41,9 +41,7 @@ import drawingBlobs
 import tumorDetector
 import autoCAD
 
-img = PhotoImage(file=r"C:\Users\ddijo\Google Drive\Carnegie Mellon First Year 2016-2017\2nd Semester\15-112\Term Project\CancerCADLocal\cancercad logo.png")
-
-LARGE_FONT= ("Verdana", 12)
+LARGE_FONT= ("Verdana", 12) #specify global fonts
 NORM_FONT = ("Helvetica", 10)
 SMALL_FONT = ("Helvetica", 8)
 
@@ -51,9 +49,7 @@ SMALL_FONT = ("Helvetica", 8)
 class CancerCAD(tk.Tk):
     def __init__(self, *args, **kwargs):
         tk.Tk.__init__(self, *args, **kwargs)
-
-        #tk.Tk.iconbitmap(self, default="clienticon.ico")
-        tk.Tk.wm_title(self, "CancerCAD")
+        tk.Tk.wm_title(self, "Cancer CAD")
         
         container = tk.Frame(self)
         container.pack(side="top", fill="both", expand = True)
@@ -62,8 +58,7 @@ class CancerCAD(tk.Tk):
 
         self.frames = {}
 
-        for F in (StartPage,PageOne,PageTwo,PageThree,PageFour,PageFive,
-                                                        PageSix, PageSeven):
+        for F in (StartPage,PageOne,PageTwo,PageThree,PageFour, PageFive ):
 
             frame = F(container, self)
 
@@ -74,7 +69,7 @@ class CancerCAD(tk.Tk):
 
 
             
-        self.show_frame(StartPage)
+        self.show_frame(StartPage) #iterate through pages to set them up
 
     def show_frame(self, cont):
         frame = self.frames[cont]
@@ -86,11 +81,8 @@ class StartPage(tk.Frame):
 
         tk.Frame.__init__(self,parent)
 
-        label = tk.Label(image=img)
-        label.image = img # keep a reference!
-        label.pack(pady=40,padx=10)
-
-        label = tk.Label(self, text="Select a Page to Begin", font=LARGE_FONT)
+        label = tk.Label(self, text="Cancer CAD", font=LARGE_FONT)
+        
         label.pack(pady=40,padx=10)
 
         button1 = ttk.Button(self, text="Manually Identify Glioblastoma",
@@ -178,6 +170,8 @@ class PageOne(tk.Frame):
 
     def findSource(self):
         self.source = tkinter.filedialog.askdirectory()
+        if self.source != None:
+            self.alert("Directory selected!")
 
     def drawBlobs(self):
         source = self.source
@@ -188,14 +182,24 @@ class PageOne(tk.Frame):
     def getAllPolygons(self): #function called later so variable is not modified
         return self.allPolygons
 
+    #from: https://pythonprogramming.net/tkinter-popup-message-window/
     def popupMsg(self, msg):
-        popup = tk.Tk()
+        popup = tk.Tk() 
         popup.wm_title("Error!")
         label = ttk.Label(popup, text=msg, font=NORM_FONT)
         label.pack(side="top", fill="x", padx=40, pady=10)
         B1 = ttk.Button(popup, text="Okay", command = popup.destroy)
         B1.pack()
         popup.mainloop()      
+
+    def alert(self, msg):
+        popup = tk.Tk() 
+        popup.wm_title("Cancer CAD")
+        label = ttk.Label(popup, text=msg, font=NORM_FONT)
+        label.pack(side="top", fill="x", padx=70, pady=10)
+        B1 = ttk.Button(popup, text="Okay", command = popup.destroy)
+        B1.pack()
+        popup.mainloop()     
 
 class PageTwo(tk.Frame):
     def __init__(self, parent, controller):
@@ -251,7 +255,7 @@ class PageTwo(tk.Frame):
 
         label.pack(pady=5,padx=10)
 
-
+    #from: https://pythonprogramming.net/tkinter-popup-message-window/
     def popupMsg(self, msg):
         popup = tk.Tk()
         popup.wm_title("Error!")
@@ -271,9 +275,20 @@ class PageTwo(tk.Frame):
 
     def findSource(self):
         self.source = tkinter.filedialog.askdirectory()
+        if self.source != None:
+            self.alert("Directory selected!")
 
     def getAllPolygons(self): #function called later so variable is not modified
         return self.allPolygons
+
+    def alert(self, msg):
+        popup = tk.Tk() 
+        popup.wm_title("Cancer CAD")
+        label = ttk.Label(popup, text=msg, font=NORM_FONT)
+        label.pack(side="top", fill="x", padx=70, pady=10)
+        B1 = ttk.Button(popup, text="Okay", command = popup.destroy)
+        B1.pack()
+        popup.mainloop()    
 
 class PageThree(tk.Frame):
     def __init__(self, parent, controller):
@@ -302,8 +317,8 @@ class PageThree(tk.Frame):
 
         button2.pack(pady=10,padx=10)
 
-        button3 = ttk.Button(self, text="3D Print",
-                            command=lambda: controller.show_frame(PageFive))
+        button3 = ttk.Button(self, text="Save as STL",
+                            command = self.stlConverter)
         button3.pack(pady=10,padx=10)
 
         button4 = ttk.Button(self, text="Back to Home",
@@ -328,8 +343,12 @@ class PageThree(tk.Frame):
 
         label.pack(pady=10,padx=10)
 
+        text1 = "3. Click 'Save as STL' to save the model as 3D printable STL" 
+        text2 = " called 'manualCancerCAD.stl'"
+        text3 = text1 + text2
+
         label = tk.Label(self, 
-            text="3. Optionally, click '3D Print' to save the model as an STL", 
+            text=text3, 
             font=NORM_FONT)
 
         label.pack(pady=0,padx=10)
@@ -339,6 +358,7 @@ class PageThree(tk.Frame):
         if self.allPolygons == None:
             self.popupMsg("No coordinates were passed through!")
 
+    #from: https://pythonprogramming.net/tkinter-popup-message-window/        
     def popupMsg(self, msg):
         popup = tk.Tk()
         popup.wm_title("Error!")
@@ -442,6 +462,26 @@ class PageThree(tk.Frame):
     def getAllPoints(self): #function called later so variable is not modified
         return self.allPoints
 
+    def stlConverter(self):
+        if self.allPoints == []: 
+            self.popupMsg("No coordinates were passed through!")
+        else:
+            # Define the vertices of the tumor
+            vertices = np.array(self.allPoints)
+            # Define the triangles composing the tumor
+            tri = Delaunay(vertices)
+            #tri.simplices returns list of all triangles
+            faces = np.array(tri.simplices)
+
+            # Create the mesh
+            tumor = mesh.Mesh(np.zeros(faces.shape[0], dtype=mesh.Mesh.dtype))
+            for i, f in enumerate(faces):
+                for j in range(3):
+                    tumor.vectors[i][j] = vertices[f[j],:]
+
+            # Write the mesh to file "cancerCAD.stl"
+            tumor.save('manualCancerCAD.stl')
+
 
 
 class PageFour(tk.Frame):
@@ -471,8 +511,8 @@ class PageFour(tk.Frame):
 
         button3.pack(pady=10,padx=10)
 
-        button4 = ttk.Button(self, text="3D Print",
-                            command=lambda: controller.show_frame(PageSeven))
+        button4 = ttk.Button(self, text="Save as STL",
+                            command = self.stlConverter)
         button4.pack(pady=10,padx=10)
    
         button5 = ttk.Button(self, text="Back to Home",
@@ -503,11 +543,15 @@ class PageFour(tk.Frame):
 
         label.pack(pady=10,padx=10)
 
+        text1 = "3. Click 'Save as STL' to save the model as 3D printable STL" 
+        text2 = " called 'autoCancerCAD.stl'"
+        text3 = text1 + text2
+
         label = tk.Label(self, 
-            text="4. Optionally, click '3D Print' to save the model as an STL", 
+            text=text3, 
             font=NORM_FONT)
 
-        label.pack(pady=5,padx=10)
+        label.pack(pady=0,padx=10)
 
     def printPolygons(self): #confirm all Polygons have been updated
         print(self.allPolygons)
@@ -517,6 +561,7 @@ class PageFour(tk.Frame):
         if self.allPolygons == None:
             self.popupMsg("No coordinates were passed through!")
 
+    #from: https://pythonprogramming.net/tkinter-popup-message-window/
     def popupMsg(self, msg):
         popup = tk.Tk()
         popup.wm_title("Error!")
@@ -623,100 +668,55 @@ class PageFour(tk.Frame):
     def getAllPoints(self): #function called later so variable is not modified
         return self.allPoints
 
+    def stlConverter(self):
+        if self.allPoints == []: 
+            self.popupMsg("No coordinates were passed through!")
+        else:
+            # Define the vertices of the tumor
+            vertices = np.array(self.allPoints)
+            # Define the triangles composing the tumor
+            tri = Delaunay(vertices)
+            #tri.simplices returns list of all triangles
+            faces = np.array(tri.simplices)
 
+            # Create the mesh
+            tumor = mesh.Mesh(np.zeros(faces.shape[0], dtype=mesh.Mesh.dtype))
+            for i, f in enumerate(faces):
+                for j in range(3):
+                    tumor.vectors[i][j] = vertices[f[j],:]
+
+            # Write the mesh to file "cancerCAD.stl"
+            tumor.save('autoCancerCAD.stl')
 
 class PageFive(tk.Frame):
-    def __init__(self, parent, controller):
-        self.pageThree = controller.frames[PageThree]
-        self.allPoints = self.pageThree.getAllPoints()
-        tk.Frame.__init__(self, parent)
-        label = tk.Label(self, text="3D Print", font=LARGE_FONT)
-        
-        label.pack(pady=10,padx=10)
-
-        button1 = ttk.Button(self, text="Update XYZ Coordinates",
-                            command = self.updatePoints(parent, controller))
-        button1.pack(pady=10,padx=10) 
-
-        button2 = ttk.Button(self, text="Print XYZ Coordinates",
-                            command = self.pointPrinter)
-        button2.pack(pady=10,padx=10)        
-
-        button3 = ttk.Button(self, text="Save Points to STL File",
-                            command = self.stlConverter)
-        button3.pack(pady=10,padx=10)
-
-
-        button4 = ttk.Button(self, text="Back to Home",
-                            command=lambda: controller.show_frame(StartPage))
-        button4.pack(pady=10,padx=10)
-
-        label = tk.Label(self, 
-            text="Instructions", 
-            font=LARGE_FONT)
-
-        label.pack(pady=10,padx=10)
-
-        label = tk.Label(self, 
-            text="1. Update coordinates into a more usable data structure", 
-            font=NORM_FONT)
-
-        label.pack(pady=10,padx=10)
-
-        label = tk.Label(self, 
-            text="2. Print coordinates to ensure they have been transferred", 
-            font=NORM_FONT)
-
-        label.pack(pady=10,padx=10)
-
-        label = tk.Label(self, 
-            text="3. Save a 'manualCancerCAD.stl' file to the root directory", 
-            font=NORM_FONT)
-
-        label.pack(pady=10,padx=10)
-
-    def pointPrinter(self):
-        if self.allPoints == []:
-            self.popupMsg("No coordinates were passed through!")
-        else: print(self.allPoints)
-
-    def updatePoints(self,parent,controller):
-        self.allPolygons = self.pageThree.getAllPoints()
-        if self.allPolygons == None:
-            self.popupMsg("No coordinates were passed through!")
-
-    def stlConverter(self):
-        # Define the vertices of the tumor
-        vertices = np.array(self.allPoints)
-        # Define the triangles composing the tumor
-        tri = Delaunay(vertices)
-        #tri.simplices returns list of all triangles
-        faces = np.array(tri.simplices)
-
-        # Create the mesh
-        tumor = mesh.Mesh(np.zeros(faces.shape[0], dtype=mesh.Mesh.dtype))
-        for i, f in enumerate(faces):
-            for j in range(3):
-                tumor.vectors[i][j] = vertices[f[j],:]
-
-        # Write the mesh to file "cancerCAD.stl"
-        tumor.save('manualCancerCAD.stl')
-
-    def popupMsg(self, msg):
-        popup = tk.Tk()
-        popup.wm_title("Error!")
-        label = ttk.Label(popup, text=msg, font=NORM_FONT)
-        label.pack(side="top", fill="x", padx=40, pady=10)
-        B1 = ttk.Button(popup, text="Okay", command = popup.destroy)
-        B1.pack()
-        popup.mainloop() 
-
-
-class PageSix(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
         label = tk.Label(self, text="Help", font=LARGE_FONT)
         
+        label.pack(pady=10,padx=10)
+
+        label = tk.Label(self, 
+                    text="Cancer CAD is a medical imaging tool to help doctors", 
+                    font=NORM_FONT)
+
+        label.pack(pady=10,padx=10)
+
+        label = tk.Label(self, 
+                    text="and patients understand the three-dimensional", 
+                    font=NORM_FONT)
+
+        label.pack(pady=10,padx=10)
+
+        label = tk.Label(self, 
+                   text="characteristics of tumors, using only two-dimensional", 
+                    font=NORM_FONT)
+
+        label.pack(pady=10,padx=10)
+
+        label = tk.Label(self, 
+                   text="tumor data (magnetic resonance images).",
+                    font=NORM_FONT)
+
         label.pack(pady=10,padx=10)
 
         label = tk.Label(self, 
@@ -725,97 +725,21 @@ class PageSix(tk.Frame):
         
         label.pack(pady=10,padx=10)
 
+        label = tk.Label(self, 
+                   text="Either manually upload and analyze glioblastoma MRIs",
+                    font=NORM_FONT)
+
+        label.pack(pady=10,padx=10)
+
+        label = tk.Label(self, 
+                   text="OR let Cancer CAD 'intelligently' find the tumors.",
+                    font=NORM_FONT)
+
+        label.pack(pady=10,padx=10)
+
         button1 = ttk.Button(self, text="Back to Home",
                             command=lambda: controller.show_frame(StartPage))
         button1.pack(pady=10,padx=10)
-
-
-class PageSeven(tk.Frame):
-    def __init__(self, parent, controller):
-        self.pageFour = controller.frames[PageFour]
-        self.allPoints = self.pageFour.getAllPoints()
-        tk.Frame.__init__(self, parent)
-        label = tk.Label(self, text="3D Print", font=LARGE_FONT)
-        
-        label.pack(pady=10,padx=10)
-
-        button1 = ttk.Button(self, text="Update XYZ Coordinates",
-                            command = self.updatePoints(parent, controller))
-        button1.pack(pady=10,padx=10) 
-
-        button2 = ttk.Button(self, text="Print XYZ Coordinates",
-                            command = self.pointPrinter)
-        button2.pack(pady=10,padx=10)        
-
-        button3 = ttk.Button(self, text="Save Points to STL File",
-                            command = self.stlConverter)
-        button3.pack(pady=10,padx=10)
-
-
-        button4 = ttk.Button(self, text="Back to Home",
-                            command=lambda: controller.show_frame(StartPage))
-        button4.pack(pady=10,padx=10)
-
-        label = tk.Label(self, 
-            text="Instructions", 
-            font=LARGE_FONT)
-
-        label.pack(pady=10,padx=10)
-
-        label = tk.Label(self, 
-            text="1. Update coordinates into a more usable data structure", 
-            font=NORM_FONT)
-
-        label.pack(pady=10,padx=10)
-
-        label = tk.Label(self, 
-            text="2. Print coordinates to ensure they have been transferred", 
-            font=NORM_FONT)
-
-        label.pack(pady=10,padx=10)
-
-        label = tk.Label(self, 
-            text="3. Save a 'autoCancerCAD.stl' file to the root directory", 
-            font=NORM_FONT)
-
-        label.pack(pady=10,padx=10)
-
-    def pointPrinter(self):
-        if self.allPoints == []:
-            self.popupMsg("No coordinates were passed through!")
-        else: print(self.allPoints)
-
-    def updatePoints(self,parent,controller):
-        self.allPolygons = self.pageFour.getAllPoints()
-        if self.allPolygons == None:
-            self.popupMsg("No coordinates were passed through!")
-
-    def stlConverter(self):
-        # Define the vertices of the tumor
-        vertices = np.array(self.allPoints)
-        # Define the triangles composing the tumor
-        tri = Delaunay(vertices)
-        #tri.simplices returns list of all triangles
-        faces = np.array(tri.simplices)
-
-        # Create the mesh
-        tumor = mesh.Mesh(np.zeros(faces.shape[0], dtype=mesh.Mesh.dtype))
-        for i, f in enumerate(faces):
-            for j in range(3):
-                tumor.vectors[i][j] = vertices[f[j],:]
-
-        # Write the mesh to file "cancerCAD.stl"
-        tumor.save('autoCancerCAD.stl')
-
-    def popupMsg(self, msg):
-        popup = tk.Tk()
-        popup.wm_title("Error!")
-        label = ttk.Label(popup, text=msg, font=NORM_FONT)
-        label.pack(side="top", fill="x", padx=40, pady=10)
-        B1 = ttk.Button(popup, text="Okay", command = popup.destroy)
-        B1.pack()
-        popup.mainloop() 
-
 
 app = CancerCAD()
 app.mainloop()
