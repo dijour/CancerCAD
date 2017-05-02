@@ -1,0 +1,24 @@
+5/2/2017
+
+Sean Price:
+1. Doesn't like UI
+2. Help screen needs more content 
+3. Wants confirmation that JPGs were loaded
+
+Tony Kennon:
+1. Wants colors in UI
+2. Wants a clearer UI for drawing blobs
+3. Wants confirmation that JPGs were loaded
+
+Christine:
+1. Help screen was useless - explain what project does
+2. Update confirmation
+3. Background could be more interesting
+
+Nina:
+1. Notification when button is clicked
+2. Instructions weren't always clear
+3. Better 3D viewer and print from python
+
+
+
