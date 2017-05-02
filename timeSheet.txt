@@ -25,4 +25,9 @@
 5/1/2016  - 5 hours - created GitHub for the project, began work on creating 
             an executable version of the program. Finished video, uploaded
             to YouTube, and updated the GitHub. Done!
+5/2/2016  - 6 hours - Turns out I wasn't done...
+            Simplified GUI interface in response to peer feedback, 
+            deleted 2 pages by adding 3D printing functionality (save as STL) 
+            into earlier pages. Re-recorded video with new functionality,
+            uploaded to YouTube.
 
