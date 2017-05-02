@@ -23,5 +23,6 @@
             existing STL converter frameworks to work with my mesh's 
             simple data structure
 5/1/2016  - 5 hours - created GitHub for the project, began work on creating 
-            an executable version of the program
+            an executable version of the program. Finished video, uploaded
+            to YouTube, and updated the GitHub. Done!
 
