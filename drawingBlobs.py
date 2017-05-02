@@ -75,18 +75,20 @@ class PolygonDrawer(object):
                 # and show them in the named window
                 canvas = cv2.imread(filename)
                 font = cv2.FONT_HERSHEY_SIMPLEX #set font
-                
-                cv2.putText(canvas,"1. Click around the tumor to extract points"
-                                    ,(25,25),font,1,(255,0,255),2,cv2.LINE_AA)
+                text1 = "1. In at least 2 MRI slices, click around the tumor"
+                text2 = " to extract points"
+                text3 = text1+text2
+                cv2.putText(canvas,text3,
+                                    (25,25),font,.75,(255,0,255),2,cv2.LINE_AA)
                 
                 cv2.putText(canvas,"2. Hit the (esc) key when done with a slice"
-                                    ,(25,60),font,1,(255,0,255),2,cv2.LINE_AA)
+                                    ,(25,60),font,.75,(255,0,255),2,cv2.LINE_AA)
 
                 cv2.putText(canvas,"3. Hit 'u' to undo a point selection"
-                                    ,(25,95),font,1,(255,0,255),2,cv2.LINE_AA)
+                                    ,(25,95),font,.75,(255,0,255),2,cv2.LINE_AA)
 
                 cv2.putText(canvas,"4. Hit 'r' to redo a point selection"
-                                    ,(25,130),font,1,(255,0,255),2,cv2.LINE_AA)
+                                   ,(25,130),font,.75,(255,0,255),2,cv2.LINE_AA)
 
                 if (len(self.points) > 0):
                     # Draw all the current polygon segments
@@ -136,7 +138,7 @@ class PolygonDrawer(object):
 def start(source):
     pd = PolygonDrawer(source)
     image = pd.run()
-    cv2.imwrite("polygon.png", image)
+    #cv2.imwrite("polygon.png", image)
     #print("All Polygons = %s" % pd.allPoints)
     #cancerCAD.cancerCAD(pd.allPoints,pd.sliceThickness)
     return pd.allPoints
