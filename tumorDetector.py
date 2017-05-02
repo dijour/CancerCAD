@@ -65,7 +65,7 @@ def blobber(filename):
     cv2.waitKey(1)
     cv2.destroyAllWindows()
 
- def flatten(L = None):
+def flatten(L = None):
     if L == None: L = allKeyPoints
     if L == []:
         return L
