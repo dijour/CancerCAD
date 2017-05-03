@@ -20,7 +20,7 @@ Cancer CAD is a medical imaging tool to help doctors and patients understand the
 Download the project as a ZIP file. Run the "Main.py" file, and select a directory for the MRI JPGs (sample images have been provided in this repository, in "Brain Folder").
 
 ## Video
-https://youtu.be/p071ZoL5ipM
+https://www.youtube.com/watch?v=0hiCee2oHiY
 
 ## Features
 * High-precision manual two-dimensional tumor selection:
